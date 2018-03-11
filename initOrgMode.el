@@ -2,15 +2,18 @@
 
 (defun db-init-org-mode ()
   (let ()
+    (message "db-init-org-mode start")
     (setq
      org-enforce-todo-dependencies t
      ;; does it work?
      org-agenda-dim-blocked-tasks t
      org-log-done 'note
-     org-log-inot-drawer t
-     org-default-notes-file "~/Documents/org/generalNotes.org")
+     org-log-into-drawer t
+     org-default-notes-file (concat db-org-work-dir "generalNotes.org")
+     org-archive-location "archive/%s::2018")
     (define-key global-map "\C-cc" 'org-capture)
     (global-set-key "\C-ca" 'org-agenda)
+    (db-init-load-machine-file-if-exists "initOrgMode.el")
     (message "db-init-org-mode done")
     ))
 
