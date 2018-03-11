@@ -43,9 +43,8 @@ because my current elisp skills are almost dead, we hardcode the full path
 Finally it should be in a subdirectory of this file named 'machine'"
   (let ((machine-file-name (concat db-elisp-dir "machine/" file-name)))
     (if (file-exists-p machine-file-name)
-	(let ()
-	  (load-file machine-file-name)
-	  (run)))))
+	(load-file machine-file-name)
+      )))
 
 ;; this is whre things start
 (db-init-emacs)
