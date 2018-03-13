@@ -41,9 +41,10 @@
   "load an additional (machine dependent) initialisation file. 
 because my current elisp skills are almost dead, we hardcode the full path
 Finally it should be in a subdirectory of this file named 'machine'"
-  (let ((machine-file-name (concat db-elisp-dir "machine/" file-name)))
+  (let ((machine-file-name (concat db-elisp-dir "machine/" (downcase(system-name))"_" file-name)))
     (if (file-exists-p machine-file-name)
 	(load-file machine-file-name)
+      (message (concat machine-file-name " does not exist"))
       )))
 
 ;; this is whre things start

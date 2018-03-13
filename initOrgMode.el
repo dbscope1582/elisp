@@ -15,7 +15,7 @@
      )
     (define-key global-map "\C-cc" 'org-capture)
     (global-set-key "\C-ca" 'org-agenda)
-;;    (db-init-load-machine-file-if-exists "initOrgMode.el")
+    (db-init-load-machine-file-if-exists "initOrgMode.el")
     (message "db-init-org-mode done")))
 
 
