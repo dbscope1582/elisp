@@ -1,10 +1,3 @@
-;; repair the mac-keys
-;; (setq
-;;    mac-option-key-is-meta nil
-;;    mac-command-key-is-meta t
-;;    mac-command-modifier 'meta
-;;    mac-option-modifier 'none
-;;    calendar-week-start-day 1)
 
 (defun db-init-my-hooks ()
   "create diverse hooks"
@@ -41,7 +34,7 @@
   "load an additional (machine dependent) initialisation file. 
 because my current elisp skills are almost dead, we hardcode the full path
 Finally it should be in a subdirectory of this file named 'machine'"
-  (let ((machine-file-name (concat db-elisp-dir "machine/" (downcase(system-name))"_" file-name)))
+  (let ((machine-file-name (concat db-elisp-dir "machine/" (car (split-string (downcase (system-name)) "\\.")) "_" file-name)))
     (if (file-exists-p machine-file-name)
 	(load-file machine-file-name)
       (message (concat machine-file-name " does not exist"))
