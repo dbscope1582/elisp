@@ -22,7 +22,10 @@
     mac-command-key-is-meta t
     mac-command-modifier 'meta
     mac-option-modifier 'none
-    calendar-week-start-day 1)
+    calendar-week-start-day 1
+    calendar-latitude 47.5394
+    calendar-longitude 7.59
+    )
   (let ()    
     (db-init-my-hooks)
     (message "db-init-emacs done")
