@@ -28,6 +28,9 @@
     )
   (let ()    
     (db-init-my-hooks)
+    ;; add the recentfile list to the file menu
+    (recentf-mode)
+    (show-paren-mode)
     (message "db-init-emacs done")
     ))
 
