@@ -14,7 +14,8 @@
      org-archive-location "archive/%s::2018"
      org-default-notes-file (concat db-org-work-dir "generalNotes.org")
      ;; the physical directory created by dropbox for its syncing
-     org-mobile-directory "~/Dropbox/MobileOrg"
+;;     org-mobile-directory "~/Dropbox/MobileOrg"
+     org-mobile-directory "~/Dropbox/Applications/MobileOrg"
      ;; just an arbitrary file name: org-mode creates it and uses it
      org-mobile-inbox-for-pull "~/OrgMobileInboxForPull"
      )
