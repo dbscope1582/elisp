@@ -31,6 +31,7 @@
     ;; add the recentfile list to the file menu
     (recentf-mode)
     (show-paren-mode)
+    (linum-mode)
     (when (>= emacs-major-version 24)
       (require 'package)
       (add-to-list
