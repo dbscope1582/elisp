@@ -25,6 +25,8 @@
     calendar-week-start-day 1
     calendar-latitude 47.5394
     calendar-longitude 7.59
+    ;; the assumed dropbox dir is in the home dir
+    db-dropbox-dir "~/Dropbox"
     )
   (let ()    
     (db-init-my-hooks)

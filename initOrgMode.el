@@ -4,8 +4,10 @@
   (let ()
     (message "db-init-org-mode start")
     (setq
-     db-org-work-dir "~/Documents/org/"
-     org-directory db-org-work-dir
+     ;; our 'official' stuff for org is directly inside the dropbox. so we
+     ;; can rely on its up-to-date-ness
+     db-org-work-dir (concat db-dropbox-dir "/org")
+     org-directory (concat db-org-work-dir "/")
      org-enforce-todo-dependencies t
      ;; does it work?
      org-agenda-dim-blocked-tasks t
@@ -15,9 +17,9 @@
      org-default-notes-file (concat db-org-work-dir "generalNotes.org")
      ;; the physical directory created by dropbox for its syncing
 ;;     org-mobile-directory "~/Dropbox/MobileOrg"
-     org-mobile-directory "~/Dropbox/Applications/MobileOrg"
+;;     org-mobile-directory "~/Dropbox/Applications/MobileOrg"
      ;; just an arbitrary file name: org-mode creates it and uses it
-     org-mobile-inbox-for-pull "~/OrgMobileInboxForPull"
+;;     org-mobile-inbox-for-pull "~/OrgMobileInboxForPull"
      )
     (define-key global-map "\C-cc" 'org-capture)
     (global-set-key "\C-ca" 'org-agenda)
