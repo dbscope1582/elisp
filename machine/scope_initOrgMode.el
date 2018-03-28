@@ -8,4 +8,5 @@
 	  '(("j" "open jourFix "
 	     ((tags-todo "jourFixe+TODO=\"TODO\"")
 	      )))
+	  org-agenda-files (list org-directory)
 	  )
