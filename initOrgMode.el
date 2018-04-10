@@ -13,7 +13,7 @@
      org-agenda-dim-blocked-tasks t
      org-log-done 'note
      org-log-into-drawer t     
-     org-archive-location (concat db-dropbox-dir "/archive/%s::2018")
+     org-archive-location (concat db-dropbox-dir "~/org/archive/%s::2018")
      org-default-notes-file (concat db-org-work-dir "generalNotes.org")
      ;; the physical directory created by dropbox for its syncing
 ;;     org-mobile-directory "~/Dropbox/MobileOrg"

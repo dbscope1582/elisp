@@ -7,7 +7,11 @@
       org-agenda-custom-commands
       '(("j" "open jourFix "
 	 ((tags-todo "jourFixe+TODO=\"TODO\"")
-	  )))
+	  ))
+	("J" "open Sam "
+	 ((tags-todo "sam+TODO=\"TODO\"")
+	  ))
+	)
       org-agenda-files (list org-directory)
       org-capture-templates
       '(("t" "Todo" entry (file+headline (concat org-directory "todos.org") "Tasks")
