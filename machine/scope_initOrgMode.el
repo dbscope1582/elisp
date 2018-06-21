@@ -3,7 +3,8 @@
 
 (setq org-link-abbrev-alist
       '(("axosoftDefect"  . "http://vserver31/Axosoft/viewitem?id=%s&type=defects&force_use_number=true")
-	("axosoftStory" . "http://vserver31/Axosoft/viewitem?id=%s&type=features&force_use_number=true"))
+	("axosoftStory" . "http://vserver31/Axosoft/viewitem?id=%s&type=features&force_use_number=true")
+	("screenshot" . "~/org/screenshots/%s"))
       org-agenda-custom-commands
       '(("j" "open jourFix "
 	 ((tags-todo "jourFixe+TODO=\"TODO\"")
