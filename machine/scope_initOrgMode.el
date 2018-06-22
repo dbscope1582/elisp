@@ -22,5 +22,7 @@
 	("d" "Dcumentation" entry (file+headline (concat org-directory "todos.org") "Documentation")
 	 "* TODO %?\n %i\n %a")
 	("i" "idea" entry (file+datetree (concat org-directory "ideas.org"))
-	 "* TODO  %?\n %i\n %a"))
+	 "* TODO  %?\n %i\n %a")
+	("j" "jour fixe reminder" entry (file+headline (concat org-directory "todos.org") "JourFixe")
+	 "* TODO %?    :jourFixe:\n %i\n %a"))
 	  )
