@@ -10,7 +10,13 @@
 	(db-init-org-mode)))
     (add-hook
      'org-after-todo-statistics-hook
-     'db-book-org-summary-todo)
+     'db-book-org-summary-todo )
+    (add-hook
+     'text-mode-hook 'turn-on-auto-fill)
+    ;;(add-hook 'text-mode-hook
+    ;;(lambda ()
+    ;;  (when (y-or-n-p "Auto Fill mode? ")
+    ;;    (turn-on-auto-fill))))
     (message "db-init-my-hooks end")
     ))
 
