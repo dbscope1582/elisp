@@ -7,6 +7,7 @@
     (setq org-link-abbrev-alist
 	  '(("axosoftDefect"  . "http://vserver31/Axosoft/viewitem?id=%s&type=defects&force_use_number=true")
 	    ("axosoftStory" . "http://vserver31/Axosoft/viewitem?id=%s&type=features&force_use_number=true")
+	    ("azureWorkitem" .  "https://dev.azure.com/scope-ch/scope%20solutions%20ag/_workitems/edit/%s")
 	    ("screenshot" . "~/org/screenshots/%s")
 	    ("scorpioLog" . "~/Dropbox/diaries/2018/scorpio/%s"))
 	  org-agenda-custom-commands
