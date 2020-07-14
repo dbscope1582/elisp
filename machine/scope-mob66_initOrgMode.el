@@ -9,7 +9,15 @@
 
 
 
-(setq exec-path '(
-    "C:/Program Files/MiKTeX 2.9/miktex/bin/x64"		    )
-)
+(setq exec-path (append exec-path '(
+				     "C:/Program Files/MiKTeX 2.9/miktex/bin/x64"
+				     "C:/Program Files/PostgreSQL/12/bin ")
+			 )
+      )
 
+
+(setq sql-postgres-login-params
+      '((user :default "postgres")
+        (database :default "scorpio")
+        (server :default "192.168.1.110")
+        (port :default 54010)))

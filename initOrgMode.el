@@ -23,6 +23,7 @@
      )
     (define-key global-map "\C-cc" 'org-capture)
     (global-set-key "\C-ca" 'org-agenda)
+    (add-to-list 'org-file-apps '(directory . emacs)) ; open directories in dired instead of the file explorer
     (db-init-load-machine-file-if-exists "initOrgMode.el")
     (message "db-init-org-mode done")))
 
