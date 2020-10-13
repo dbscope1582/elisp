@@ -54,8 +54,9 @@
     ;; for a better idea of what is possible
     (custom-theme-set-faces
      name
-     ;; Blanched Almond is sligthly darker than the default. 
-     '(default ((t (:foreground "Blanched Almond"))))
+     ;; Blanched Almond is sligthly darker than the default.
+     ;; gray20 is the default fro tsdh-dark (https://github.com/jwiegley/emacs-release/blob/master/etc/themes/tsdh-dark-theme.el)
+     '(default ((t (:foreground "Blanched Almond" :background "gray20"))))
      ;;     '(font-lock-comment-face ((t (:foreground "#DFAF8F"))))   
      )
     )
