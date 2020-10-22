@@ -21,3 +21,17 @@
         (database :default "scorpio")
         (server :default "192.168.1.110")
         (port :default 54010)))
+
+
+(defun db-org-new-diary-entry (title)
+  (interactive "stitle:")
+  (let ( (file-name   (format "%s_%s.org"
+			      (format-time-string "%Y/%m%d")
+			      (mapconcat 'identity (split-string title " ") "_"))
+		      )
+	 (year (format-time-string "%y")))
+    (insert (format "#+include:~/Dropbox/diaries/%s" file-name))
+    (insert "\n#+begin_comment")
+    (insert (format "\nfile:~/Dropbox/diaries/%s" file-name))
+    (insert "\n#+end_comment")
+    ))

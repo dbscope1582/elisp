@@ -9,22 +9,40 @@
   (add-hook
    'sql-mode-hook
    '(lambda ()
-     (display-line-numbers-mode)))
+      (display-line-numbers-mode)))
   (add-to-list 'auto-mode-alist '("\\.asciidoc\\'" . adoc-mode))
   (add-to-list 'auto-mode-alist '("\\.cs\\'" . c-mode))
-  ;; from https://emacs.stackexchange.com/questions/17431/how-do-i-change-portions-of-a-custom-theme
+  (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
+;; from https://emacs.stackexchange.com/questions/17431/how-do-i-change-portions-of-a-custom-theme
   
-  (mapcar (lambda (x)
+(mapcar (lambda (x)
 	  (unless (package-installed-p x)
 	    (package-install x)
 	    (require x))
 	  )
-	  '( restclient sr-speedbar graphviz-dot-mode))
-  ;; auto revert mode (files modified on disk)
-  (global-auto-revert-mode 1)
-  ;; auto refresh dired when file changes
-  (add-hook 'dired-mode-hook 'auto-revert-mode)
-  )
+	'( restclient
+	   sr-speedbar
+	   graphviz-dot-mode
+	   openwith
+	   jenkins
+	   oauth2
+	   json
+	   yaml-mode
+	   ))
+;; auto revert mode (files modified on disk)
+(global-auto-revert-mode 1)
+;; auto refresh dired when file changes
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+)
+
+;; allows to define the system application with which a file is shown when opened from within dired-mode
+( progn
+(require 'openwith)
+(openwith-mode t)
+(setq
+ openwith-associations
+ '(("\\.svg'" "brave" (file)))
+ ))
 
 ;; sr-speedbar-open	Open sr-speedbar window.
 ;; sr-speedbar-close	Close sr-speedbar window.
@@ -65,3 +83,10 @@
   ;;   (set-foreground-color "black")
   )
 
+
+
+(defun cygwin-shell ()
+  "Run cygwin bash in shell mode."
+  (interactive)
+  (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
+    (call-interactively 'shell)))
