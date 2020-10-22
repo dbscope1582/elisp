@@ -13,7 +13,7 @@
      org-agenda-dim-blocked-tasks t
      org-log-done 'note
      org-log-into-drawer t     
-     org-archive-location (concat db-dropbox-dir "~/org/archive/%s::2018")
+    org-archive-location (concat db-dropbox-dir "~/org/archive/%s::2018")
      org-default-notes-file (concat db-org-work-dir "generalNotes.org")
      ;; the physical directory created by dropbox for its syncing
 ;;     org-mobile-directory "~/Dropbox/MobileOrg"
@@ -29,10 +29,10 @@
 
 
 
-(defun db-book-org-summary-todo (n-done n-not-done)
-  "switch entry to DONE when all subentires are done, otehrwise switch to TODO"
-  (let (org-log-done org-log-states)
-    (org-todo
-     (if (= n-not-done 0)
-	 "DONE"
-       "TODO"))))
+;; (defun db-book-org-summary-todo (n-done n-not-done)
+;;   "switch entry to DONE when all subentires are done, otehrwise switch to TODO"
+;;   (let (org-log-done org-log-states)
+;;     (org-todo
+;;      (if (= n-not-done 0)
+;; 	 "DONE"
+;;        "TODO"))))

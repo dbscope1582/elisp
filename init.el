@@ -17,6 +17,7 @@
     ;;(lambda ()
     ;;  (when (y-or-n-p "Auto Fill mode? ")
     ;;    (turn-on-auto-fill))))
+    (load (concat db-elisp-dir "lorem-ipsum.el"))
     (db-init-load-machine-file-if-exists "initHooks.el")
     (message "db-init-my-hooks end")
     ))
