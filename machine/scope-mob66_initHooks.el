@@ -11,6 +11,7 @@
    '(lambda ()
       (display-line-numbers-mode)))
   (add-to-list 'auto-mode-alist '("\\.asciidoc\\'" . adoc-mode))
+  (add-to-list 'auto-mode-alist '("\\.adoc\\'" . adoc-mode))
   (add-to-list 'auto-mode-alist '("\\.cs\\'" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 ;; from https://emacs.stackexchange.com/questions/17431/how-do-i-change-portions-of-a-custom-theme

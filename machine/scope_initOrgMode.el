@@ -32,3 +32,25 @@
 	     "* TODO %?\n %i\n %a")
 	    ("p" "Products (maybe later with lookup?)" entry (file+headline (concat org-directory "products.org") "other")))
 	  )))
+
+
+(setq sql-postgres-login-params
+      '((user :default "postgres")
+        (database :default "scorpio")
+        (server :default "192.168.1.110")
+        (port :default 54010)))
+
+(defun db-org-new-diary-entry (title)
+  (interactive "stitle:")
+  (let ( (file-name   (format "%s_%s.org"
+			      (format-time-string "%Y/%m%d")
+			      (mapconcat 'identity (split-string title " ") "_"))
+		      )
+	 (year (format-time-string "%y")))
+    (insert (format "#+include:%s/diaries/%s" db-dropbox-dir file-name))
+    (insert "\n#+begin_comment")
+    (insert (format "\nfile:%s/diaries/%s" db-dropbox-dir file-name))
+    (insert "\n#+end_comment")
+    ;; for later:
+    ;; create the file, open it and insert the original title as heading
+    ))
