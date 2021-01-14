@@ -90,7 +90,7 @@
 			   (mapconcat 'identity (split-string title " ") "_")))
 	 )
     (unless (file-directory-p  dir-name)
-      (make-directory dir-name))
+      (make-directory dir-name t))
     (insert (format "file:/%s" dir-name))
     ))
 

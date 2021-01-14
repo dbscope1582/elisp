@@ -9,7 +9,8 @@
   (add-hook
    'sql-mode-hook
    '(lambda ()
-      (display-line-numbers-mode)))
+      (display-line-numbers-mode)
+      (toggle-truncate-lines 42))) ; 
   (add-to-list 'auto-mode-alist '("\\.asciidoc\\'" . adoc-mode))
   (add-to-list 'auto-mode-alist '("\\.adoc\\'" . adoc-mode))
   (add-to-list 'auto-mode-alist '("\\.cs\\'" . c-mode))
