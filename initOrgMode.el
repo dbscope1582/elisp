@@ -13,9 +13,8 @@
      org-agenda-dim-blocked-tasks t
      org-log-done 'note
      org-log-into-drawer t     
-    org-archive-location (concat db-dropbox-dir "~/org/archive/%s::2018")
+     org-archive-location (concat db-dropbox-dir "~/org/archive/%s::2018")
      org-default-notes-file (concat db-org-work-dir "generalNotes.org")
-
      )
     (define-key global-map "\C-cc" 'org-capture)
     (global-set-key "\C-ca" 'org-agenda)

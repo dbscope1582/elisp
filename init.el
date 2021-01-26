@@ -35,6 +35,9 @@
     calendar-longitude 7.59
     ;; the assumed dropbox dir is in the home dir
     db-dropbox-dir "~/Dropbox"
+    db-dropbox-diaries-dir (format "%s/diaries" db-dropbox-dir)
+    ;; the separator between words in diray file names
+    db-dropbox-path-word-separator "_"
     )
   (let ()    
     (db-init-my-hooks)
@@ -63,6 +66,29 @@ Finally it should be in a subdirectory of this file named 'machine'"
 	(load-file machine-file-name)
       (message (concat machine-file-name " does not exist"))
       )))
+
+;; must create them here, else they are defined only on the first lauch of an orgmode file
+(defun db-org-main-diary-dir ()
+  (format "%s/%s"
+   db-dropbox-diaries-dir
+   (format-time-string "%Y")))
+
+(defun db-org-main-index-file ()
+  (format "%s/index.org" (db-org-main-diary-dir)))
+
+
+(defun db-file-path-to-clipboard ()
+  "Put the current file name on the clipboard
+Thanks to scottfrazer (https://stackoverflow.com/questions/2416655/file-path-to-clipboard-in-emacs/53075288)"
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (with-temp-buffer
+        (insert filename)
+        (clipboard-kill-region (point-min) (point-max)))
+      (message filename))))
 
 ;; this is whre things start
 (db-init-emacs)

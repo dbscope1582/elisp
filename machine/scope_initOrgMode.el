@@ -1,17 +1,15 @@
 ;; initialisation for computers in the context of scope
 
 
-(let ((scorpio-documents-root (concat db-dropbox-dir "/diaries/2018/scorpio" )))
-  (let ((scorpio-todo-file (concat scorpio-documents-root "/todo.org" ))
-	(dummy-temp (concat scorpio-documents-root "/%s"))
-	(current-year (format-time-string "%Y"))
-	)
-    (setq org-link-abbrev-alist
+
+(let (
+      (current-year (format-time-string "%Y"))
+      )
+  (setq org-link-abbrev-alist
 	  '(("axosoftDefect"  . "http://vserver31/Axosoft/viewitem?id=%s&type=defects&force_use_number=true")
 	    ("axosoftStory" . "http://vserver31/Axosoft/viewitem?id=%s&type=features&force_use_number=true")
-	    ("azureWorkitem" .  "https://dev.azure.com/scope-ch/scope%20solutions%20ag/_workitems/edit/%s")
+	    ("azureWorkitem" .  "https://dev.azure.com/scope-ch/scope%20solutions%20ag/_workitems/edit/%(db-org-parse-link-tag)")
 	    ("screenshot" . "~/org/screenshots/%s")
-	    ("scorpioLog" . "~/Dropbox/diaries/2018/scorpio/%s")
 	    ("scorpioUod" . "http://scorpio-t-1:9080/scorpio-client/app/en-US/units-of-description/%s/details?view=form"))
 	  org-agenda-custom-commands
 	  '(("j" "open jourFixe "
@@ -23,32 +21,27 @@
 	    )
 	  org-tag-alist
 	  '(
-	    ("@daily" . ?d )
-	    ("@urs" . ?u)
-	    ("@scorpio" . ?3)
-	    ("@scorpioClient" . ?4)
-	    ("@ingestServer" . ?5)
-	    ("@scopeXplore". ?2)
-	    ("@scorpioIngest" . ?1)
+	    ("userDocu" . ?d)
+	    ("sprint" . ?s)
+	    ("scorpio" . ?3)
+	    ("scorpioClient" . ?4)
+	    ("ingestServer" . ?5)
+	    ("scopeXplore". ?2)
+	    ("scorpioIngest" . ?1)
 					; ?6
 	    )
-	  ;; does not work (syntax)
-;;	  org-tag-persistent-alist	  '(@sprint26 @sprint27 @sprint28 @sprint29 @sprint30)
-	  ;; defined by custom - do not overwrite
-	  ;;org-agenda-files (list org-directory scorpio-todo-file)
-	  org-capture-templates
-	  '(("t" "Todo" entry (file+headline (concat org-directory (file-name-as-directory current-year)  "todos.org") "Tasks")
-	     "* TODO %?\n %i\n %a")
-	    ("s" "Scorpio" entry (file+headline scorpio-todo-file "Scorpio")
-	     "** TODO %?\n %i\n %a")
-	    ("d" "Documentation" entry (file+headline (concat org-directory (file-name-as-directory current-year) "todos.org") "Documentation")
-	     "* TODO %?\n %i\n %a")
-	    ("i" "idea" entry (file+datetree (concat org-directory "ideas.org"))
-	     "* TODO  %?\n %i\n %a")
-	    ("j" "jour fixe reminder" entry (file+headline (concat org-directory ( file-name-as-directory current-year) "todos.org") "JourFixe")
-	     "* TODO %?\n %i\n %a")
-	    ("p" "Products (maybe later with lookup?)" entry (file+headline (concat org-directory (file-name-as-directory current-year) "products.org") "other")))
-	  )))
+	  org-agenda-files '( "~/Dropbox/diaries/2021" "~/Dropbox/diaries/domain")
+	  ;; org-capture-templates
+	  ;; '(("t" "Todo" entry (file+headline (concat org-directory (file-name-as-directory current-year)  "todos.org") "Tasks")
+	  ;;    "* TODO %?\n %i\n %a")
+	  ;;   ("d" "Documentation" entry (file+headline (concat org-directory (file-name-as-directory current-year) "todos.org") "Documentation")
+	  ;;    "* TODO %?\n %i\n %a")
+	  ;;   ("i" "idea" entry (file+datetree (concat org-directory "ideas.org"))
+	  ;;    "* TODO  %?\n %i\n %a")
+	  ;;   ("j" "jour fixe reminder" entry (file+headline (concat org-directory ( file-name-as-directory current-year) "todos.org") "JourFixe")
+	  ;;    "* TODO %?\n %i\n %a")
+	  ;;   ("p" "Products (maybe later with lookup?)" entry (file+headline (concat org-directory (file-name-as-directory current-year) "products.org") "other")))
+	  ))
 
 
 (setq sql-postgres-login-params
@@ -57,21 +50,24 @@
         (server :default "192.168.1.110")
         (port :default 54010)))
 
+(defun db-org-diary-path-today ( title)
+  (interactive "stitle")
+     (format "%s/%s%s%s.org"
+	     db-dropbox-diaries-dir
+	     (format-time-string "%Y/%m%d")
+	     db-dropbox-path-word-separator
+	     title)
+     )
+
 (defun db-org-new-diary-entry (title)
   (interactive "stitle:")
-  (let ( (file-name   (format "%s_%s.org"
-			      (format-time-string "%Y/%m%d")
-			      (mapconcat 'identity (split-string title " ") "_"))
-		      )
-	 (year (format-time-string "%y")))
-    (insert (format "#+include: \"%s/diaries/%s\"\n" db-dropbox-dir file-name))
+  (let ((file (db-org-diary-path-today (mapconcat 'identity (split-string title " ") db-dropbox-path-word-separator))))
+    (insert (format "#+include: \"%s\"\n" file))
     (insert "#+begin_comment\n")
-    (insert (format "file:%s/diaries/%s\n" db-dropbox-dir file-name))
+    (insert (format "file:%s\n" file))
     (insert "#+end_comment\n")
-    ;; for later:
-    ;; create the file, open it and insert the original title as heading
     ))
-
+  
 (defun db-org-new-docker-dir (title)
   "Create a working directory in the docker temp dir" 
 					;  (interactive "stitle:" )
@@ -124,3 +120,7 @@
 		  name))
   (insert "\n  #+end_src\n"))
 
+(defun db-org-parse-link-tag (tag)
+  "remove everything after the first colon. This allows to write clearer links to azure like so:
+azureWorkItem:1318:Transfer term of protection - without a descriptiive text"
+  (car (split-string tag " ")))
