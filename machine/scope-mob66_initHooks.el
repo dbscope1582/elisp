@@ -15,6 +15,7 @@
   (add-to-list 'auto-mode-alist '("\\.adoc\\'" . adoc-mode))
   (add-to-list 'auto-mode-alist '("\\.cs\\'" . c-mode))
   (add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 ;; from https://emacs.stackexchange.com/questions/17431/how-do-i-change-portions-of-a-custom-theme
   
 (mapcar (lambda (x)
@@ -31,7 +32,13 @@
 	   json
 	   yaml-mode
 	   magit
+	   typescript-mode
+	   neotree
+;; not really useful
+	   ;;	   plantuml-mode 
 	   ))
+;; allow [F8] to switch neotree on or off
+(global-set-key [f8] 'neotree-toggle)
 ;; auto revert mode (files modified on disk)
 (global-auto-revert-mode 1)
 )
@@ -42,7 +49,8 @@
 (openwith-mode t)
 (setq
  openwith-associations
- '(("\\.svg'" "brave" (file)))
+ '(("\\.svg'" "brave" (file))
+   ("\\.png'" "brave" (file)))
  ))
 
 ;; sr-speedbar-open	Open sr-speedbar window.

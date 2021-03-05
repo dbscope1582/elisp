@@ -9,7 +9,7 @@
 	  '(("axosoftDefect"  . "http://vserver31/Axosoft/viewitem?id=%s&type=defects&force_use_number=true")
 	    ("axosoftStory" . "http://vserver31/Axosoft/viewitem?id=%s&type=features&force_use_number=true")
 	    ("azureWorkitem" .  "https://dev.azure.com/scope-ch/scope%20solutions%20ag/_workitems/edit/%(db-org-parse-link-tag)")
-	    ("screenshot" . "~/org/screenshots/%s")
+	    ("screenshot" . "~/Dropbox/diaries/screenshots/%s")
 	    ("scorpioUod" . "http://scorpio-t-1:9080/scorpio-client/app/en-US/units-of-description/%s/details?view=form"))
 	  org-agenda-custom-commands
 	  '(("j" "open jourFixe "
@@ -42,6 +42,7 @@
 	  ;;    "* TODO %?\n %i\n %a")
 	  ;;   ("p" "Products (maybe later with lookup?)" entry (file+headline (concat org-directory (file-name-as-directory current-year) "products.org") "other")))
 	  ))
+
 
 
 (setq sql-postgres-login-params
