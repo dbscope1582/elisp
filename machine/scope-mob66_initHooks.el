@@ -35,7 +35,9 @@
 	   typescript-mode
 	   neotree
 ;; not really useful
-	   ;;	   plantuml-mode 
+	   ;;	   plantuml-mode
+	   ;; next installation failed
+	   ;; treemacs
 	   ))
 ;; allow [F8] to switch neotree on or off
 (global-set-key [f8] 'neotree-toggle)
@@ -119,6 +121,12 @@
   ;;(add-hook 'dired-mode-hook 'auto-revert-mode)
   )
 
+;;try to activate sql source code in org-babel
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sql . t)))
+;; add additional languages with '((language . t)))
 
 ;; seems not to work
 ;; (progn

@@ -49,9 +49,9 @@
       (require 'package)
       (add-to-list
        'package-archives
-       ;; '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
        '("melpa-milkbox" . "http://melpa.milkbox.net/packages/")
-       t))
+       ;'("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
+       ))
     (message "db-init-emacs done")
     ))
 
