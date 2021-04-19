@@ -18,7 +18,7 @@
 
   ;; mobile.org
   (setq
-   org-directory "~/Documents/org"
+   org-directory  "~/Documents/org"
    org-mobile-directory (concat org-directory "/mobile-org")
    org-mobile-inbox-for-pull (concat org-directory "/inbox-for-pull")
    )

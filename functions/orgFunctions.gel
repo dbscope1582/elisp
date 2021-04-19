@@ -1,0 +1,72 @@
+
+(let (
+      (current-year (format-time-string "%Y"))
+      )
+  (setq
+   ;; org-link-abbrev-alist
+   ;; 	  '(("axosoftDefect"  . "http://vserver31/Axosoft/viewitem?id=%s&type=defects&force_use_number=true")
+   ;; 	    ("axosoftStory" . "http://vserver31/Axosoft/viewitem?id=%s&type=features&force_use_number=true")
+   ;; 	    ("azureWorkitem" .  "https://dev.azure.com/scope-ch/scope%20solutions%20ag/_workitems/edit/%(db-org-parse-link-tag)")
+   ;; 	    ("screenshot" . "~/Dropbox/diaries/screenshots/%s")
+   ;; 	    ("scorpioUod" . "http://scorpio-t-1:9080/scorpio-client/app/en-US/units-of-description/%s/details?view=form"))
+   ;; 	  org-agenda-custom-commands
+   ;; 	  '(("j" "open jourFixe "
+   ;; 	     ((tags-todo "jourFixe+TODO=\"TODO\"")
+   ;; 	      ))
+   ;; 	    ("J" "open Sam "
+   ;; 	     ((tags-todo "sam+TODO=\"TODO\"")
+   ;; 	      ))
+   ;; 	    )
+   ;; 	  org-tag-alist
+   ;; 	  '(
+   ;; 	    ("userDocu" . ?d)
+   ;; 	    ("sprint" . ?s)
+   ;; 	    ("scorpio" . ?3)
+   ;; 	    ("scorpioClient" . ?4)
+   ;; 	    ("ingestServer" . ?5)
+   ;; 	    ("scopeXplore". ?2)
+   ;; 	    ("scorpioIngest" . ?1)
+   ;; 					; ?6
+   ;; 	    )
+	  org-agenda-files '( (db-org-main-diary-dir) );;"~/Dropbox/diaries/2021" "~/Dropbox/diaries/domain")
+	  ;; org-capture-templates
+	  ;; '(("t" "Todo" entry (file+headline (concat org-directory (file-name-as-directory current-year)  "todos.org") "Tasks")
+	  ;;    "* TODO %?\n %i\n %a")
+	  ;;   ("d" "Documentation" entry (file+headline (concat org-directory (file-name-as-directory current-year) "todos.org") "Documentation")
+	  ;;    "* TODO %?\n %i\n %a")
+	  ;;   ("i" "idea" entry (file+datetree (concat org-directory "ideas.org"))
+	  ;;    "* TODO  %?\n %i\n %a")
+	  ;;   ("j" "jour fixe reminder" entry (file+headline (concat org-directory ( file-name-as-directory current-year) "todos.org") "JourFixe")
+	  ;;    "* TODO %?\n %i\n %a")
+	  ;;   ("p" "Products (maybe later with lookup?)" entry (file+headline (concat org-directory (file-name-as-directory current-year) "products.org") "other")))
+	  ))
+
+
+  
+(defun db-org-new-docker-dir (title)
+  "Create a working directory in the docker temp dir" 
+					;  (interactive "stitle:" )
+  (interactive
+   (list
+    (let ((default (mapconcat 'identity (split-string (file-name-sans-extension (buffer-name))"_") " ")))
+      (read-string
+       (format "title (%s)" default) nil nil default)))
+   )
+  (let* (
+	 (docker-root-dir "c:/Users/dbinkert/home/docker/temp")
+	 (dir-name (format "%s/%s%s"
+			   docker-root-dir
+			   ;;			   (format-time-string "%Y/%m%d")
+			   (format-time-string "%Y/")
+			   (mapconcat 'identity (split-string title " ") "_")))
+	 )
+    (unless (file-directory-p  dir-name)
+      (make-directory dir-name t))
+    (insert (format "file:/%s" dir-name))
+    ))
+
+
+(defun db-org-parse-link-tag (tag)
+  "remove everything after the first colon. This allows to write clearer links to azure like so:
+azureWorkItem:1318:Transfer term of protection - without a descriptiive text"
+  (car (split-string tag " ")))
