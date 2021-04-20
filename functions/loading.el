@@ -36,8 +36,9 @@
       ;; do not call it always
        ;;(package-refresh-contents)
        )
-    (db-install-package
+    (db-install-packages
      '( magit
+	org-noter
 	))
     (message "db-init-emacs done")
     ))
@@ -88,11 +89,10 @@ Finally it should be in a subdirectory of this file named 'machine'"
       (message (concat machine-file-name " does not exist"))
       )))
 
-(defun db-install-package (packages)
+(defun db-install-packages (packages)
   "make sure an (emacs) package is available"
   (mapcar (lambda (package)
 	    (unless (package-installed-p package)
-	      (package-install package)
 	      (package-install package)
 	      (require package )))
 	  packages
