@@ -54,15 +54,15 @@
 (defun db-org-diary-path-today ( title)
   (interactive "stitle")
      (format "%s/%s%s%s.org"
-	     db-dropbox-diaries-dir
+	     (db-diaries-dir)
 	     (format-time-string "%Y/%m%d")
-	     db-dropbox-path-word-separator
+	     (db-diaries-path-word-separator)
 	     title)
      )
 
 (defun db-org-new-diary-entry (title)
   (interactive "stitle:")
-  (let ((file (db-org-diary-path-today (mapconcat 'identity (split-string title " ") db-dropbox-path-word-separator))))
+  (let ((file (db-org-diary-path-today (mapconcat 'identity (split-string title " ") (db-diaries-path-word-separator)))))
     (insert (format "#+include: \"%s\"\n" file))
     (insert "#+begin_comment\n")
     (insert (format "file:%s\n" file))

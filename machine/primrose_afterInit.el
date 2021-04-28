@@ -3,16 +3,16 @@
 (if (display-graphic-p)
     (progn
       (message "graphic ui")
+      ;; not really sure if this is good, but it is a 
+;;      (load-theme 'tsdh-dark)
       (custom-set-variables
-;;       '(custom-enabled-themes (quote (tsdh-dark)))
+       '(custom-enabled-themes (quote (tsdh-dark)))
        '(initial-buffer-choice "~/Dropbox/family/2020_new"))
-      (db-theme-dark)
       )
   (progn
     ;; probably also set better colors
-;;    (custom-set-variables
-;;     '(custom-enabled-themes (quote (wheatgrass))))
-    (db-theme-console)
+    (custom-set-variables
+     '(custom-enabled-themes (quote (wheatgrass))))
     (mu4e)
     )
   )

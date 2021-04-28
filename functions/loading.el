@@ -6,14 +6,10 @@
     mac-command-modifier 'meta
     mac-option-modifier 'none
     calendar-week-start-day 1
+    ;; coords in degre
     calendar-latitude 47.5394
     calendar-longitude 7.59
-    ;; the assumed dropbox dir is in the home dir
-    db-dropbox-dir "~/Dropbox"
-    db-dropbox-diaries-dir (format "%s/diaries" db-dropbox-dir)
-    ;; the separator between words in diray file names
-    db-dropbox-path-word-separator "_"
-    ;; replace beep with a visual clue (experimental maybe remove again
+    ;; replace beep with a visual clue (experimental maybe remove again and uncomment the ring-bell-function below
     visible-bell 1
     ;; completely remove any bell (probably the good one
     ;;ring-bell-function 'ignore 
@@ -39,10 +35,21 @@
     (db-install-packages
      '( magit
 	org-noter
+	;for org-mode-html export
+	;htmlize
+	which-key
 	))
+    (db-post-init)
     (message "db-init-emacs done")
     ))
 
+(defun db-post-init ()
+  "called, when everything is loaded"
+  (progn
+    (message "before afterInit")
+    (db-init-load-machine-file-if-exists "afterInit.el")
+    (message "after afterInit"))
+  )
 (defun db-init-my-hooks ()
   "create diverse hooks"
   (let ()
@@ -65,6 +72,8 @@
 		(dired-hide-details-mode)
 		(auto-revert-mode)))
     (db-init-load-machine-file-if-exists "initHooks.el")
+    ;; enable which-key
+    (which-key-mode)
     (message "db-init-my-hooks end")
     ))
 
