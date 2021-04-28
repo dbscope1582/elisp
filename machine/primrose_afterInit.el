@@ -1,3 +1,9 @@
+;; prepare mu4e
+(let ((mu4e-dir "/usr/share/emacs/site-lisp/mu4e/"))
+  (add-to-list 'load-path mu4e-dir)
+  (load (concat mu4e-dir "mu4e.el"))
+  (load (concat (db-var-path 'elisp-dir) "init-mu4e.el"))
+  )
 
 
 (if (display-graphic-p)
@@ -17,10 +23,6 @@
     )
   )
 
-;; auto revert mode (files modified on disk)
-(global-auto-revert-mode 1)
-;; auto refresh dired when file changes
-(add-hook 'dired-mode-hook 'auto-revert-mode)
 
 
 
