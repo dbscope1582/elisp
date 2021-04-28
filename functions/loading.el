@@ -9,10 +9,7 @@
     ;; coords in degre
     calendar-latitude 47.5394
     calendar-longitude 7.59
-    ;; replace beep with a visual clue (experimental maybe remove again and uncomment the ring-bell-function below
-    visible-bell 1
-    ;; completely remove any bell (probably the good one
-    ;;ring-bell-function 'ignore 
+    ring-bell-function 'ignore 
     )
   (let ()    
     (db-init-my-hooks)
@@ -20,6 +17,10 @@
     (recentf-mode)
     (show-paren-mode)
     (linum-mode)
+    ;; automatically refresh files after they changed on disk
+    (global-auto-revert-mode 1)
+    ;; switch off the toolbar
+    (tool-bar-mode -1)
     (when (>= emacs-major-version 24)
       (require 'package)
       ;; (add-to-list
