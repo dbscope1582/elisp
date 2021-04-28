@@ -72,8 +72,10 @@
 		(dired-hide-details-mode)
 		(auto-revert-mode)))
     (db-init-load-machine-file-if-exists "initHooks.el")
+    
     ;; enable which-key
-    (which-key-mode)
+    (if (package-installed-p 'which-key)
+	(which-key-mode))
     (message "db-init-my-hooks end")
     ))
 
