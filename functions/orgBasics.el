@@ -1,5 +1,6 @@
 
-(defun db-org-diaries-dir () (db-org-sub-path "diaries"))
+(defun db-org-diaries-dir ()
+  (db-diaries-dir))
 
 (defun db-org-main-diary-dir ()
   "The main diary dir is the diary dir for the current year"
@@ -10,7 +11,6 @@
 
 (defun db-org-diary-path-today ( title)
   (interactive "stitle")
-  (db-org-child-of  (db-org-main-diary-dir))
      (format "%s/%s%s%s.org"
 	     (db-org-main-diary-dir)
 	     (format-time-string "%m%d")
@@ -43,6 +43,7 @@ Thanks to scottfrazer (https://stackoverflow.com/questions/2416655/file-path-to-
 		  title)))
 
 
+
 (defun db-org-new-diary-entry (title)
   "create an org-link for a new diary entry. 
 The link includes the current day und a title. All blanks in the given title are replaced with underscores"
@@ -51,13 +52,14 @@ The link includes the current day und a title. All blanks in the given title are
 	       (mapconcat
 		'identity
 		(split-string title
-			      (db-org-string 'text-word-separator)
+			      (db-org-string 'text-word-separator))
 			      (db-org-string 'path-word-separator)))))
     (insert (format "#+include: \"%s\"\n" file))
     (insert "#+begin_comment\n")
     (insert (format "file:%s\n" file))
     (insert "#+end_comment\n")
-    )))
+    ))
+
 
 (defun db-org-refactor-copy-buffer-name ()
   (interactive)
