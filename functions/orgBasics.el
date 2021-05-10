@@ -45,19 +45,43 @@ Thanks to scottfrazer (https://stackoverflow.com/questions/2416655/file-path-to-
 
 
 (defun db-org-new-diary-entry (title)
-  "create an org-link for a new diary entry. 
-The link includes the current day und a title. All blanks in the given title are replaced with underscores"
-  (interactive "stitle:")
-  (let ((file (db-org-diary-path-today
-	       (mapconcat
-		'identity
-		(split-string title
-			      (db-org-string 'text-word-separator))
-			      (db-org-string 'path-word-separator)))))
-    (insert (format "#+include: \"%s\"\n" file))
-    (insert "#+begin_comment\n")
-    (insert (format "file:%s\n" file))
-    (insert "#+end_comment\n")
+  "create a diary file (=> file name contains date) according to the given title
+and link it with the current file"
+  (interactive "sTitle: ")
+  (let* (
+	 ;;let the user choose an absoulte path
+	 (absolute-dir (file-name-as-directory
+			(read-directory-name "target directory: "
+					     (db-org-main-diary-dir)
+					     ;; "."
+					     )))
+	 ;;however we transform it into a relative path
+	 ;; relative paths allow us to copy the entire file structure elsewhere
+	 (relative-dir (file-relative-name absolute-dir))
+	 ;;build the new file name according to the current date and the provided title
+	 (file-name (format "%s%s%s.org"
+			    (format-time-string "%m%d")
+			    (db-org-string 'path-word-separator)
+			    (mapconcat
+			     'identity
+			     (split-string title
+					   (db-org-string 'text-word-separator))
+			     (db-org-string 'path-word-separator))))
+	 (source-file (buffer-file-name))
+	 )
+    ;; link the file 
+    (insert (format "file:%s\n" (concat relative-dir file-name)))
+    ;; create a new file, initialize it with its name as a title
+    ;; and activate it
+    (progn
+      (find-file (concat absolute-dir file-name))
+      ;; add a link to the file where the new file originates
+      (if source-file
+	  (insert (format "created out of: file:%s\n\n" (file-relative-name source-file)))
+	)
+    (insert "* ")
+    (db-org-refactor-title-from-buffer-name)
+    )
     ))
 
 
