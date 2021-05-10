@@ -9,13 +9,24 @@
 	  'light-theme 'infodoc
 	  'dark-theme 'tsdh-dark
 	  'console-theme 'wheatgrass
+	  'packages '( magit
+		       org-noter
+		       which-key)
 	  )
  db-org-vars (list
 	      'work-dir "iniitialize me"
 	      'path-word-separator "_"
 	      'text-word-separator " "))
 
-;;(defun db-dropbox-dir () (interactive) (db-var-path 'dropbox-dir))
+(defun db-property (property) (plist-get db-vars property))
+
+(defun db-org-property (property) (plist-get db-org-vars property))
+
+(defun db-var-path (key)
+  (interactive)
+  (file-name-as-directory (db-property key)))
+
+
 (defun db-org-work-dir () (interactive) (db-org-path 'work-dir))
 (defun db-diaries-path-word-separator () (interactive) (db-org-string 'path-word-separator))
 (defun db-diaries-dir () (interactive) (db-var-path 'diary-dir))
@@ -25,32 +36,30 @@
 (defun db-default-themes ()
   (interactive)
   (cons
-   (plist-get db-vars 'light-theme)
-   (plist-get db-vars 'dark-theme))
+   (db-property 'light-theme)
+   (db-property 'dark-theme))
   )
+
 (defun db-default-console-theme()
   (interactive)
-  (plist-get db-vars 'console-theme))
+  (db-property 'console-theme))
 
 
 (defun db-org-child-of (parent child)
   "concatenates the items parent - child to a directory"
   (concat (file-name-as-directory parent) child ))
 
-(defun db-var-path (key)
-  (interactive)
-  (file-name-as-directory (plist-get db-vars key)))
-
 
 (defun db-org-path (key)
   "return the value for the provided key as path"
   (interactive)
-  (file-name-as-directory (plist-get db-org-vars key)))
+  (file-name-as-directory (db-org-property key)))
+
 
 (defun db-org-string (key)
   "return the value for the provided key"
   (interactive "")
-  (format "%s" (plist-get db-org-vars key)))
+  (format "%s" (db-org-property key)))
 
 (defun db-org-sub-path (&rest folders)
   (defun inner (acc folders)

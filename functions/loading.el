@@ -21,25 +21,26 @@
     (global-auto-revert-mode 1)
     ;; switch off the toolbar
     (tool-bar-mode -1)
-    (when (>= emacs-major-version 24)
-      (require 'package)
+    ;;(when (>= emacs-major-version 24)
+    ;;  (require 'package)
       ;; (add-to-list
       ;;  'package-archives
       ;;  '("melpa-milkbox" . "http://melpa.milkbox.net/packages/"))
-      (add-to-list
-       'package-archives
-       '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
-       )
+      ;; commented since this should be managed by customize
+      ;; (add-to-list
+      ;;  'package-archives
+      ;;  '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
+      ;; )
       ;; do not call it always
        ;;(package-refresh-contents)
-       )
-    (db-install-packages
-     '( magit
-	org-noter
-	;for org-mode-html export
-	;htmlize
-	which-key
-	))
+      ;; )
+    (db-install-packages (db-property 'packages))
+     ;; '( magit
+     ;; 	org-noter
+     ;; 	;for org-mode-html export
+     ;; 	;htmlize
+     ;; 	which-key
+     ;; 	))
     (db-post-init)
     (message "db-init-emacs done")
     ))
